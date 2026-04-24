@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "https://bulkwala.com";
+
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || "http://localhost:5000",
+  baseURL: BACKEND_URL,
   withCredentials: true, // IMPORTANT: allows sending cookies
 });
 
@@ -40,7 +42,7 @@ axiosInstance.interceptors.response.use(
         // Try to refresh token
         const refreshToken = localStorage.getItem("refreshToken");
         const response = await axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/api/users/refresh-token`,
+          `${BACKEND_URL}/api/users/refresh-token`,
           {},
           { 
             withCredentials: true,
